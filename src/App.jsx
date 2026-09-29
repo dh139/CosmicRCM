@@ -217,23 +217,7 @@ export default function App() {
 
         <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
           
-          {/* Social Proof Pill (Professional Star Icons - Zero Emoji) */}
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/95 border border-slate-200/90 shadow-sm mb-7 backdrop-blur-sm">
-            <div className="flex -space-x-2 shrink-0">
-              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="avatar" />
-              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="avatar" />
-              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="avatar" />
-              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" alt="avatar" />
-            </div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 leading-none">
-              <div className="inline-flex items-center gap-0.5 shrink-0">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={13} className="fill-amber-400 text-amber-400 shrink-0" />
-                ))}
-              </div>
-              <span>Rated 4.98/5 by 120+ US Healthcare Providers</span>
-            </div>
-          </div>
+        
 
           {/* Headline with Radiant Animated Shimmer Gradient */}
           <h1 className="text-4xl sm:text-6xl md:text-[4.25rem] font-extrabold text-slate-900 tracking-tight leading-[1.12] max-w-4xl mx-auto mb-6">
@@ -802,13 +786,7 @@ export default function App() {
                   <ArrowRight size={15} />
                 </button>
 
-                <a 
-                  href="tel:18005550199" 
-                  className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors border border-white/20 leading-none"
-                >
-                  <PhoneCall size={15} className="text-blue-400 shrink-0" />
-                  <span>+1 (800) 555-0199</span>
-                </a>
+              
               </div>
             </div>
 
