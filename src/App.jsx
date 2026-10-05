@@ -23,7 +23,11 @@ import {
   Building2,
   Stethoscope,
   Coins,
-  BadgePercent
+  BadgePercent,
+  Check,
+  Activity,
+  Layers,
+  MapPin
 } from 'lucide-react';
 
 // Modern Healthcare Tech Vector Logo
@@ -47,6 +51,7 @@ function CosmicLogo() {
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [auditModalOpen, setAuditModalOpen] = useState(false);
+  const [coreOfferTab, setCoreOfferTab] = useState('medical'); // 'medical' | 'dental' | 'revenue'
 
   // Scroll Reveal Observer Effect
   useEffect(() => {
@@ -129,6 +134,55 @@ export default function App() {
     return `$${(val / 1000).toFixed(0)}K`;
   };
 
+  // Service Areas list from Technocruitx
+  const serviceAreas = [
+    "Mental health clinics",
+    "Urgent care",
+    "Dental clinic",
+    "Nursing homes",
+    "Hospital",
+    "Dialysis centers",
+    "Ambulatory surgical centers",
+    "Medical offices and Clinics",
+    "Imaging and Radiology centers"
+  ];
+
+  // Service Territory States from Technocruitx
+  const serviceTerritories = [
+    "New York",
+    "New Jersey",
+    "California",
+    "Michigan",
+    "Florida",
+    "Texas",
+    "Illinois",
+    "Pennsylvania",
+    "Many more.."
+  ];
+
+  // Medical Specialties from Technocruitx
+  const medicalSpecialties = [
+    "Internal Medicine",
+    "Family Physicians",
+    "Urgent Care",
+    "Skilled Nursing Facilities",
+    "Neurology",
+    "Gynecology",
+    "Radiology",
+    "Pediatrics",
+    "Cardiology",
+    "Psychology",
+    "Chiropractic Care",
+    "Hematology & Oncology",
+    "Psychiatry",
+    "Anesthesiology",
+    "Laboratory Billing",
+    "General Surgery",
+    "Home Health Services",
+    "Gastroenterology",
+    "Many more.."
+  ];
+
   return (
     <div className="min-h-screen bg-white text-slate-700 font-sans antialiased overflow-x-hidden selection:bg-blue-100 selection:text-blue-900">
       
@@ -150,23 +204,16 @@ export default function App() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+          <nav className="hidden lg:flex items-center gap-8 text-[13.5px] font-semibold text-slate-600">
             <a href="#services" className="hover:text-blue-600 transition-colors py-1 leading-none">Services</a>
+            <a href="#specialties" className="hover:text-blue-600 transition-colors py-1 leading-none">Specialties</a>
             <a href="#process" className="hover:text-blue-600 transition-colors py-1 leading-none">Our Process</a>
             <a href="#calculator" className="hover:text-blue-600 transition-colors py-1 leading-none">ROI Calculator</a>
-            <a href="#assessment" className="hover:text-blue-600 transition-colors py-1 leading-none">Partner Audit</a>
             <a href="#why-us" className="hover:text-blue-600 transition-colors py-1 leading-none">Why Us</a>
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right Action Button */}
           <div className="inline-flex items-center gap-3">
-            <button 
-              onClick={() => setAuditModalOpen(true)}
-              className="hidden sm:inline-flex items-center justify-center text-xs font-semibold text-slate-600 hover:text-blue-600 px-3 py-2 transition-colors cursor-pointer leading-none"
-            >
-              Client Login
-            </button>
-
             <button 
               onClick={() => setAuditModalOpen(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-blue-600/35 transition-all inline-flex items-center justify-center gap-2 cursor-pointer leading-none group"
@@ -178,7 +225,7 @@ export default function App() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 inline-flex items-center justify-center text-slate-700 shrink-0 transition-colors"
+              className="lg:hidden w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 inline-flex items-center justify-center text-slate-700 shrink-0 transition-colors"
               aria-label="Toggle Navigation"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -188,16 +235,16 @@ export default function App() {
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="mt-3 bg-white/95 backdrop-blur-2xl border border-slate-200 rounded-3xl p-6 shadow-2xl flex flex-col gap-4 md:hidden animate-in fade-in zoom-in-95 duration-200">
-            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1">Services</a>
-            <a href="#process" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1">Our Process</a>
-            <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1">ROI Calculator</a>
-            <a href="#assessment" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1">Partner Assessment</a>
-            <a href="#why-us" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1">Why Us</a>
+          <div className="mt-3 bg-white/95 backdrop-blur-2xl border border-slate-200 rounded-3xl p-6 shadow-2xl flex flex-col gap-4 lg:hidden animate-in fade-in zoom-in-95 duration-200">
+            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1 transition-colors">Services</a>
+            <a href="#specialties" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1 transition-colors">Specialties</a>
+            <a href="#process" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1 transition-colors">Our Process</a>
+            <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1 transition-colors">ROI Calculator</a>
+            <a href="#why-us" onClick={() => setMobileMenuOpen(false)} className="text-base font-semibold text-slate-800 hover:text-blue-600 py-1 transition-colors">Why Us</a>
             <div className="pt-4 border-t border-slate-100">
               <button 
                 onClick={() => { setMobileMenuOpen(false); setAuditModalOpen(true); }}
-                className="w-full py-3 rounded-full bg-blue-600 text-white font-semibold text-sm inline-flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-full bg-blue-600 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 shadow-md shadow-blue-600/25"
               >
                 <span>Request Free Audit</span>
                 <ArrowRight size={14} />
@@ -217,8 +264,6 @@ export default function App() {
 
         <div className="max-w-6xl mx-auto px-6 relative z-10 text-center">
           
-        
-
           {/* Headline with Radiant Animated Shimmer Gradient */}
           <h1 className="text-4xl sm:text-6xl md:text-[4.25rem] font-extrabold text-slate-900 tracking-tight leading-[1.12] max-w-4xl mx-auto mb-6">
             Maximize Your Healthcare <br />
@@ -373,7 +418,432 @@ export default function App() {
         </div>
       </section>
 
-      {/* 4. Interactive Financial Suite: Calculator & Partner Assessment */}
+      {/* 4. SECTION 1: SERVICES & SOLUTIONS (Professional UI/UX with High-Resolution Photography) */}
+      <section id="services" className="reveal-on-scroll py-24 bg-white border-b border-slate-200/80">
+        <div id="core-offers" className="max-w-6xl mx-auto px-6">
+          
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-12">
+         
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Services & Solutions
+            </h2>
+            <p className="text-slate-500 text-sm mt-2">
+              Comprehensive medical billing, dental billing, and revenue cycle management tailored for maximum practice collections.
+            </p>
+          </div>
+
+          {/* Segmented Control / Tabs */}
+          <div className="flex justify-center mb-14">
+            <div className="bg-slate-100/90 p-1.5 rounded-full inline-flex border border-slate-200/80 shadow-inner max-w-full overflow-x-auto">
+              <button
+                onClick={() => setCoreOfferTab('medical')}
+                className={`px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  coreOfferTab === 'medical'
+                    ? 'bg-white text-blue-600 shadow-sm border border-slate-200/60 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Medical Billing
+              </button>
+              <button
+                onClick={() => setCoreOfferTab('dental')}
+                className={`px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  coreOfferTab === 'dental'
+                    ? 'bg-white text-blue-600 shadow-sm border border-slate-200/60 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Dental Billing
+              </button>
+              <button
+                onClick={() => setCoreOfferTab('revenue')}
+                className={`px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  coreOfferTab === 'revenue'
+                    ? 'bg-white text-blue-600 shadow-sm border border-slate-200/60 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Revenue Cycle Analytics
+              </button>
+            </div>
+          </div>
+
+          {/* Tab 1 Content: Medical Billing */}
+          {coreOfferTab === 'medical' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center animate-in fade-in duration-300">
+              
+              {/* Left Column: Feature Points */}
+              <div className="lg:col-span-7 space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug mb-6">
+                  With Us excellence meets efficiency in the realm of medical billing services.
+                </h3>
+
+                {[
+                  {
+                    title: "Efficient Claims Submission",
+                    desc: "Our experienced team meticulously prepares and submits claims, ensuring accuracy and minimizing delays in reimbursement."
+                  },
+                  {
+                    title: "Accurate Coding",
+                    desc: "With certified AAPC coders on board, we ensure precise coding for diagnoses and procedures, reducing claim rejections."
+                  },
+                  {
+                    title: "Claims Follow-up",
+                    desc: "We're relentless in tracking claims, ensuring they are processed promptly and addressing any issues that arise."
+                  },
+                  {
+                    title: "Patient Support",
+                    desc: "Our patient-friendly approach includes handling billing inquiries, creating clarity, and enhancing patient satisfaction."
+                  },
+                  {
+                    title: "Comprehensive Reporting",
+                    desc: "Access detailed reports to gain insights into your practice's financial performance and make informed decisions."
+                  }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-blue-400 hover:shadow-md transition-all flex items-start gap-4 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0 mt-0.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <Check size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Column: High-End Real Editorial Photography */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl group bg-slate-50">
+                  <img 
+                    src="/images/medical-billing.jpg" 
+                    alt="Medical billing specialist and physician reviewing claims"
+                    className="w-full h-[460px] sm:h-[520px] object-cover group-hover:scale-103 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating Glassmorphism Badge */}
+                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-white/40 shadow-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                          <CheckCircle2 size={20} />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900">Certified AAPC / AHIMA Team</div>
+                          <div className="text-[11px] text-slate-500">98% First-Pass Clean Claims Rate</div>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-blue-600 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-full">
+                        HIPAA Verified
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {/* Tab 2 Content: Dental Billing */}
+          {coreOfferTab === 'dental' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center animate-in fade-in duration-300">
+              
+              {/* Left Column: Feature Points */}
+              <div className="lg:col-span-7 space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug mb-6">
+                  Navigating Dental Billing Complexity with Expertise
+                </h3>
+
+                {[
+                  {
+                    title: "Accurate Claims Submission",
+                    desc: "Our team of experienced dental billing professionals ensures that claims are accurately prepared and submitted, minimizing claim rejections and delays."
+                  },
+                  {
+                    title: "CDT and ICD-10 Coding",
+                    desc: "We specialize in precise CDT and ICD-10 coding, ensuring that your services are properly documented and billed, leading to accurate reimbursement."
+                  },
+                  {
+                    title: "Insurance Verification & Breakdown",
+                    desc: "We verify insurance coverage to ensure a smooth billing process and to prevent surprises for your patients."
+                  },
+                  {
+                    title: "Patient Support",
+                    desc: "Our patient-centered approach extends to handling billing inquiries and clarifying statements, enhancing patient satisfaction and loyalty."
+                  },
+                  {
+                    title: "Comprehensive Reporting",
+                    desc: "Access detailed financial reports that provide insights into your practice's performance, allowing you to make informed decisions."
+                  }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-blue-400 hover:shadow-md transition-all flex items-start gap-4 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0 mt-0.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <Check size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Column: High-End Real Editorial Photography */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl group bg-slate-50">
+                  <img 
+                    src="/images/dental-billing.jpg" 
+                    alt="Dental billing specialist and dentist in modern dental clinic"
+                    className="w-full h-[460px] sm:h-[520px] object-cover group-hover:scale-103 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating Glassmorphism Badge */}
+                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-white/40 shadow-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold">
+                          <CheckCircle2 size={20} />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900">ADA & CDT Certified Suite</div>
+                          <div className="text-[11px] text-slate-500">Same-Day Pre-Auth & Verification</div>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-sky-700 bg-sky-50 border border-sky-200/80 px-2.5 py-1 rounded-full">
+                        Dental RCM
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {/* Tab 3 Content: Revenue Cycle Analytics */}
+          {coreOfferTab === 'revenue' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center animate-in fade-in duration-300">
+              
+              {/* Left Column: Feature Points */}
+              <div className="lg:col-span-7 space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug mb-6">
+                  Beyond Metrics, We Understand Your Revenue.
+                </h3>
+
+                {[
+                  {
+                    title: "Performance Analysis",
+                    desc: "Gain a deep understanding of your revenue cycle's performance metrics. Track key indicators, identify bottlenecks, and uncover opportunities for improvement."
+                  },
+                  {
+                    title: "Claim Analysis",
+                    desc: "Dive into claim data to pinpoint patterns in claim denials, rejections, and delays. This enables you to address issues proactively and minimize revenue leakage."
+                  },
+                  {
+                    title: "Coding Accuracy",
+                    desc: "Our analytics ensure coding accuracy by highlighting potential errors or discrepancies in coding practices, reducing the risk of claim denials."
+                  },
+                  {
+                    title: "Predictive Modeling",
+                    desc: "Leverage predictive analytics to anticipate future revenue trends and plan strategically for your practice's financial growth."
+                  },
+                  {
+                    title: "Customized Reporting",
+                    desc: "Access intuitive, customizable reports that present complex patient data in a clear, actionable format, aiding in better decision-making."
+                  }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-blue-400 hover:shadow-md transition-all flex items-start gap-4 group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0 mt-0.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <Check size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Column: High-End Real Editorial Photography */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl group bg-slate-50">
+                  <img 
+                    src="/images/rcm-analytics.jpg" 
+                    alt="Healthcare executives reviewing financial RCM analytics dashboards"
+                    className="w-full h-[460px] sm:h-[520px] object-cover group-hover:scale-103 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating Glassmorphism Badge */}
+                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-white/40 shadow-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                          <TrendingUp size={20} />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900">Predictive Financial Forensics</div>
+                          <div className="text-[11px] text-slate-500">Actionable Payer Remittance Intelligence</div>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-1 rounded-full">
+                        Live BI Engine
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+        </div>
+      </section>
+
+      {/* 5. SECTION 2: SPECIALTIES & SERVICE AREAS (Clean, Premium SaaS Card Layout) */}
+      <section id="specialties" className="reveal-on-scroll py-24 bg-slate-50/70 border-b border-slate-200/80">
+        <div className="max-w-6xl mx-auto px-6">
+          
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-blue-600 text-xs font-bold uppercase tracking-wider block mb-2">
+              NATIONWIDE PRACTICE ECOSYSTEM
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Coverage & Specialties
+            </h2>
+            <p className="text-slate-500 text-sm mt-2">
+              Specialized billing infrastructure tailored to your facility type, regional payer guidelines, and clinical specialty.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            
+            {/* Row 1: Service Area */}
+            <div className="bg-white rounded-3xl p-7 sm:p-9 border border-slate-200/90 shadow-sm hover:shadow-md transition-all">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="lg:col-span-4">
+                  <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                    <Building2 size={15} />
+                    Facility Coverage
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                    Service Area
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
+                    Discover Our Comprehensive Medical RCM Services Across Diverse Service Areas.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-8 flex flex-wrap gap-2.5">
+                  {serviceAreas.map((area, idx) => (
+                    <span 
+                      key={idx}
+                      className="inline-flex items-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200/80 hover:border-blue-300 transition-all cursor-default"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Row 2: Expertise in Service Territory */}
+            <div className="bg-white rounded-3xl p-7 sm:p-9 border border-slate-200/90 shadow-sm hover:shadow-md transition-all">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="lg:col-span-4">
+                  <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                    <MapPin size={15} />
+                    Regional Jurisdiction
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                    Expertise in Service Territory
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
+                    Medical Billing Excellence Across Every State Line. Fully compliant with regional Medicare MAC and commercial payer guidelines.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-8 flex flex-wrap gap-2.5">
+                  {serviceTerritories.map((state, idx) => (
+                    <span 
+                      key={idx}
+                      className={`inline-flex items-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-default border ${
+                        state === 'Many more..'
+                          ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                          : 'bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border-slate-200/80 hover:border-blue-300'
+                      }`}
+                    >
+                      {state}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Row 3: Medical Specialties */}
+            <div className="bg-white rounded-3xl p-7 sm:p-9 border border-slate-200/90 shadow-sm hover:shadow-md transition-all">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="lg:col-span-4">
+                  <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                    <Stethoscope size={15} />
+                    Clinical Specialization
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                    Medical Specialties
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
+                    RCM expertise for Every Medical Specialty with specialty-credentialed coding professionals.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-8 flex flex-wrap gap-2.5">
+                  {medicalSpecialties.map((spec, idx) => (
+                    <span 
+                      key={idx}
+                      className={`inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-default border ${
+                        spec === 'Many more..'
+                          ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                          : 'bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border-slate-200/80 hover:border-blue-300'
+                      }`}
+                    >
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. Interactive Financial Suite: Calculator & Partner Assessment */}
       <section id="calculator" className="py-24 bg-white relative">
         <div className="max-w-6xl mx-auto px-6">
           
@@ -391,7 +861,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             
-            {/* Tool 1: Revenue Impact Calculator (Upgraded Clean Light Design - No dark blue box) */}
+            {/* Tool 1: Revenue Impact Calculator */}
             <div className="reveal-on-scroll bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-xl shadow-slate-100 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3.5 mb-6">
@@ -483,7 +953,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Redesigned Output Box (Clean Light Luminous Aesthetic - No Dark Box!) */}
+              {/* Redesigned Output Box */}
               <div className="mt-8 p-7 rounded-2xl bg-gradient-to-br from-blue-50/90 via-sky-50/40 to-indigo-50/60 border border-blue-200/90 text-center shadow-sm">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/70 text-blue-800 text-[11px] font-bold uppercase tracking-wider mb-2">
                   <Coins size={13} className="text-blue-600" />
@@ -586,8 +1056,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. Core Services Section */}
-      <section id="services" className="reveal-on-scroll py-24 bg-slate-50/70 border-t border-slate-200/80">
+      {/* 7. Specialized Capabilities Section */}
+      <section id="capabilities" className="reveal-on-scroll py-24 bg-slate-50/70 border-t border-slate-200/80">
         <div className="max-w-6xl mx-auto px-6">
           
           <div className="text-center max-w-xl mx-auto mb-16">
@@ -667,7 +1137,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. 5-Stage Process Workflow */}
+      {/* 8. 5-Stage Process Workflow */}
       <section id="process" className="reveal-on-scroll py-24 bg-white border-t border-slate-200/80">
         <div className="max-w-6xl mx-auto px-6">
           
@@ -702,7 +1172,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 7. Comparison Table: Why Cosmic RCM */}
+      {/* 9. Comparison Table: Why Cosmic RCM */}
       <section id="why-us" className="reveal-on-scroll py-24 bg-slate-50/70 border-t border-slate-200/80">
         <div className="max-w-6xl mx-auto px-6">
           
@@ -755,7 +1225,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. Call To Action Section (Executive Card) */}
+      {/* 10. Call To Action Section (Executive Card) */}
       <section className="reveal-on-scroll py-20 bg-slate-50/50 border-t border-slate-200">
         <div className="max-w-5xl mx-auto px-6">
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c162c] via-[#0f2244] to-[#070e1c] p-8 sm:p-14 text-center text-white shadow-2xl border border-blue-900/40">
@@ -785,8 +1255,6 @@ export default function App() {
                   <span>Claim Your Free Audit Today</span>
                   <ArrowRight size={15} />
                 </button>
-
-              
               </div>
             </div>
 
@@ -794,7 +1262,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 9. Clean Modern SaaS Footer */}
+      {/* 11. Clean Modern SaaS Footer */}
       <footer className="border-t border-slate-200 bg-white py-12 text-xs text-slate-500">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="inline-flex items-center gap-3">
@@ -814,7 +1282,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* 10. Free Audit Request Modal */}
+      {/* 12. Free Audit Request Modal */}
       {auditModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl border border-slate-200 w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
